@@ -7,9 +7,10 @@
 
 article
   background-color color-background
+  color color-main
   header.article-info
     @media mini
-      border-bottom 1px solid lighten(color-gray,10%)
+      border-bottom 3px solid lighten(color-gray,10%)
     >h1
       padding 0.2em 3%
       font-size font-size+70
@@ -25,23 +26,32 @@ article
       padding 0.3em 4% 0.3em 0
       text-align right
       border-bottom 1px solid lighten(color-gray,30%)
+      color color-ul  
       @media mini
         float right
         border-bottom none
+        color color-ul  
     >p.article-time
       padding-top 0.5em
       font-size 0.8em
       text-align center
+      color color-ul  
+      time
+        color color-blue
+        font-weight 700
+        margin-right 2em
       @media mini
         float right
         margin-right 1em
         padding-top 0.1em
         font-size 0.9em
+        color color-ul  
       &:before
         font-family font-icon-family
         font-size font-size+30
         content "\f017"
-        font-smoothing()      
+        font-smoothing()
+        color color-ul     
   .article-content
     padding 1.5em 4%
     .kb      
@@ -97,6 +107,9 @@ article
     ul,ol
       padding-left 2em
       font-size font-size+5
+      color color-ul
+      background #fff
+      border-radius 10px
       @media mini
         padding-left 3em
     ul li

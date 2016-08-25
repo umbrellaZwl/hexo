@@ -29,10 +29,6 @@ data.forEach(function(){
   })
 {% endcodeblock %}
 
-{% pullquote %}
-content
-{% endpullquote %}
-
 # *列表*
 
 在文本前面加上 <code>-</code> 即可设置列表格式，如果是有序列表直接加上1. 2. 就好
