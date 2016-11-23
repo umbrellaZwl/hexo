@@ -134,6 +134,55 @@ function AllActivitiesController(dataService, notifier, $state, activities){//�
 }
 ```
 其他的属性例如data以及其他的属性，都可以在$state.current来获得当前状态的配置中看到
+
+## state相关事件
+当使用ui-router时，切换不同的state分别有
+<code>$stateChangeSuccess</code><code>$stateNotFound</code><code>$stateChangeError</code>等事件。
+当angular模块执行run的时候，可以给<code>$rootScope</code>绑定相关事件，example：
+```javascript
+app.run('$rootScope','$log', function($rootScope, $log){
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+    $rootScope.currentState = toState.name;
+    $log.debug('event', event);
+    $log.debug('toState', toState);
+    $log.debug('toParams', toParams);
+    $log.debug('fromState', fromState);
+    $log.debug('fromParams', fromParams);
+  });
+
+  $rootScope.$on('$stateNotFound', function(event, unfoundState, fromState, fromParams){
+    $log.error('The request state was not found: ' + unfoundState);
+  });
+        
+  $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){
+    $log.error('An error occurred while changing states: ' + error);
+      
+    $log.debug('event', event);
+    $log.debug('toState', toState);
+    $log.debug('toParams', toParams);
+    $log.debug('fromState', fromState);
+    $log.debug('fromParams', fromParams);
+  });
+})
+```
+
+## ui-router的onEnter和onExit事件
+onEnter和onExit事件在配置路由的时候作为一个属性写进去就好了，例如：
+```javascript
+.state('myprofile',{
+  url:'/myprofile',
+  controller:'MyprofileController',
+  controllerAs: 'myprofile',
+  templateUrl: '/app/tempaltes/myprofile.html',
+  onEnter: function($log){
+    $log.debug('Entering the classrooms state');
+  },
+  onExit: function($log){
+    $log.debug('Existing the classrooms state');
+  }
+})
+```
+
 至此，uirouter大致用法就这么多
 参考链接[http://www.cnblogs.com/darrenji/p/4982533.html](http://www.cnblogs.com/darrenji/p/4982533.html)
 
